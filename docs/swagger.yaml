@@ -1,0 +1,109 @@
+definitions:
+  handler.BookRequestDoc:
+    properties:
+      author_name:
+        example: Jhonn Doe
+        type: string
+      genre:
+        example: notice
+        type: string
+      publication_year:
+        example: 2023
+        type: integer
+      publisher:
+        example: Brazil Journal
+        type: string
+      title:
+        example: Test title
+        type: string
+    type: object
+  handler.BookResponseDoc:
+    properties:
+      author_name:
+        example: Jhonn Doe
+        type: string
+      genre:
+        example: notice
+        type: string
+      id:
+        example: 36e4379a-be55-462d-ab9e-da0c532623ea
+        type: string
+      publication_year:
+        example: 2023
+        type: integer
+      publisher:
+        example: Brazil Journal
+        type: string
+      title:
+        example: Test title
+        type: string
+    type: object
+info:
+  contact:
+    email: leonardobispo1000@gmail.com
+  description: API for storing and download PDFs into a Google Cloud Plattform bucket
+  license:
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Library API
+  version: "1.0"
+paths:
+  /book/download:
+    post:
+      description: Download your books by passing the necessary parameters
+      parameters:
+      - description: ID of the book you want to download
+        in: query
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+      summary: Download Book
+      tags:
+      - Cloud
+  /books:
+    get:
+      description: Get books matching passed filters
+      parameters:
+      - description: Name of the book you want to search
+        in: query
+        name: name
+        type: string
+      - description: ID of the book you want to search
+        in: query
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/handler.BookResponseDoc'
+            type: array
+      summary: Get Books
+      tags:
+      - Books
+    post:
+      description: Creates the book in database and uploads the file into bucket
+      parameters:
+      - description: Required book information
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/handler.BookRequestDoc'
+      - description: Book File
+        in: formData
+        name: book
+        required: true
+        type: file
+      responses:
+        "200":
+          description: OK
+      summary: Send Book
+      tags:
+      - Books
+swagger: "2.0"
