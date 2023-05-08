@@ -1,8 +1,9 @@
 package repository
 
 import (
-	"library-api/pkg/library"
 	"sync"
+
+	"library-api/pkg/library"
 
 	"go.mongodb.org/mongo-driver/mongo"
 )

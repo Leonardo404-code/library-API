@@ -1,8 +1,9 @@
 package handler
 
 import (
-	"library-api/pkg/library"
 	"sync"
+
+	"library-api/pkg/library"
 )
 
 type handler struct {

@@ -2,14 +2,14 @@ package service
 
 import "library-api/pkg/library"
 
-type services struct {
+type service struct {
 	libraryRepo library.Repository
 }
 
 func Must(
 	libraryRepo library.Repository,
 ) library.Services {
-	svc := &services{
+	svc := &service{
 		libraryRepo: libraryRepo,
 	}
 
