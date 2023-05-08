@@ -11,7 +11,7 @@ func SetupRoutes() *chi.Mux {
 	library := handlers.Build()
 
 	r.Get("/books", library.GetBooks)
-	r.Post("/books", library.GetBooks)
+	r.Post("/books", library.SendBook)
 	r.Post("/books/download", library.GetBooks)
 
 	return r

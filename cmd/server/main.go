@@ -17,7 +17,9 @@ func init() {
 //	@description	API for storing and download PDFs into a Google Cloud Plattform bucket
 //	@contect.name	Leonardo Bispo
 //	@contact.email	leonardobispo1000@gmail.com
+//
 // license.name Apache 2.0
+//
 //	@license.url	http://www.apache.org/licenses/LICENSE-2.0.html
 func main() {
 	routes := routes.SetupRoutes()
