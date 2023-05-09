@@ -14,10 +14,10 @@ var (
 )
 
 type repository struct {
-	conn *mongo.Client
+	conn *mongo.Collection
 }
 
-func Must(mongoConnection *mongo.Client) library.Repository {
+func Must(mongoConnection *mongo.Collection) library.Repository {
 	once.Do(func() {
 		repo = &repository{
 			conn: mongoConnection,
