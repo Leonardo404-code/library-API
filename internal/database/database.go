@@ -9,11 +9,19 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func Connect() *mongo.Client {
+func Connect() *mongo.Collection {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI("mongodb://localhost:27017"))
+	credentials := options.Credential{
+		Username: "root",
+		Password: "12345678",
+	}
+
+	client, err := mongo.Connect(
+		ctx,
+		options.Client().ApplyURI("mongodb://localhost:27017").SetAuth(credentials),
+	)
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +30,7 @@ func Connect() *mongo.Client {
 		panic(err)
 	}
 
-	client.Database("library").Collection("books")
+	collection := client.Database("library").Collection("books")
 
-	return client
+	return collection
 }
