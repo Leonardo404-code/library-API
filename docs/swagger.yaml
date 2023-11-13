@@ -1,26 +1,34 @@
 definitions:
   handler.BookRequestDoc:
     properties:
-      author_name:
-        example: Jhonn Doe
+      description:
+        example: Some description here
         type: string
       genre:
         example: notice
         type: string
-      publication_year:
-        example: 2023
-        type: integer
-      publisher:
-        example: Brazil Journal
+      release_date:
+        example: "2023"
         type: string
       title:
         example: Test title
         type: string
+      write:
+        example: Jhonn Doe
+        type: string
     type: object
   handler.BookResponseDoc:
     properties:
-      author_name:
-        example: Jhonn Doe
+      created_at:
+        example: "2006-01-02T15:04:05Z"
+        format: date
+        type: string
+      deleted_at:
+        example: "2006-01-02T15:04:05Z"
+        format: date
+        type: string
+      description:
+        example: Some description here
         type: string
       genre:
         example: notice
@@ -28,14 +36,18 @@ definitions:
       id:
         example: 36e4379a-be55-462d-ab9e-da0c532623ea
         type: string
-      publication_year:
-        example: 2023
-        type: integer
-      publisher:
-        example: Brazil Journal
+      release_date:
+        example: "2023"
         type: string
       title:
         example: Test title
+        type: string
+      updated_at:
+        example: "2006-01-02T15:04:05Z"
+        format: date
+        type: string
+      write:
+        example: Jhonn Doe
         type: string
     type: object
 info:
@@ -72,7 +84,7 @@ paths:
         type: string
       - description: ID of the book you want to search
         in: query
-        name: id
+        name: book_id
         type: string
       produces:
       - application/json

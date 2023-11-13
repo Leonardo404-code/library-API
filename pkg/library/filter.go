@@ -14,7 +14,7 @@ type Filter struct {
 }
 
 func (f *Filter) GenerateQuery() (bson.D, error) {
-  query := bson.D{}
+	query := bson.D{}
 
 	if f.BookID != "" {
 		if !primitive.IsValidObjectID(f.BookID) {

@@ -7,13 +7,13 @@ import (
 	"library-api/pkg/library"
 )
 
-func (r *repository) Search(filter *library.Filter) (book []*library.Book, err error) {	
+func (r *repository) Search(filter *library.Filter) (book []*library.Book, err error) {
 	query, err := filter.GenerateQuery()
 	if err != nil {
 		return nil, err
 	}
 
-  result, err := r.conn.Find(context.Background(), query)
+	result, err := r.conn.Find(context.Background(), query)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrFindBook, err)
 	}
