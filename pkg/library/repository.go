@@ -1,6 +1,6 @@
 package library
 
 type Repository interface {
-	Search(bookName, bookID string) (*Book, error)
+	Search(*Filter) ([]*Book, error)
 	CreateBook(*Book) error
 }

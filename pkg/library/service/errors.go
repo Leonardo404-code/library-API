@@ -7,5 +7,4 @@ var (
 	ErrInvalidDescription = errors.New("invalid description")
 	ErrInvalidDate        = errors.New("invalid date")
 	ErrCreateBook         = errors.New("error in create book")
-	ErrCreateUUID         = errors.New("error in create UUID")
 )
