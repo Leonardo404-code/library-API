@@ -1,0 +1,9 @@
+version: '3'
+
+tasks:
+  lint:
+    cmds:
+      - 'gofmt -s -w .'
+  update_docs:
+    cmds:
+      - 'swag init -g ./cmd/server/main.go'
