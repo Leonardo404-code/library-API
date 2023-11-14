@@ -16,9 +16,9 @@ import (
 // Injectors from wire.go:
 
 func Build() library.Handlers {
-	client := database.Connect()
-	libraryRepository := repository.Must(client)
+	collection := database.Connect()
+	libraryRepository := repository.Must(collection)
 	services := service.Must(libraryRepository)
-	handlers := Must(services)
+	handlers := Must(services, libraryRepository)
 	return handlers
 }

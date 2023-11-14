@@ -8,7 +8,7 @@ import (
 )
 
 func (s *service) SendBook(book *library.Book) (*library.Book, error) {
-	if len(book.Name) < 3 || len(book.Name) > 80 {
+	if len(book.Title) < 3 || len(book.Title) > 80 {
 		return nil, fmt.Errorf(
 			"%w: the field 'name' must be between 3 and 80 characters long",
 			ErrInvalidName,
@@ -27,9 +27,10 @@ func (s *service) SendBook(book *library.Book) (*library.Book, error) {
 	}
 
 	bookModel := &library.Book{
-		Name:        book.Name,
+		Title:       book.Title,
 		Description: book.Description,
 		Writer:      book.Writer,
+		Gender:      book.Gender,
 		ReleaseDate: book.ReleaseDate,
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),

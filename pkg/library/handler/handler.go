@@ -7,7 +7,8 @@ import (
 )
 
 type handler struct {
-	librarySvc library.Services
+	librarySvc  library.Services
+	libraryRepo library.Repository
 }
 
 var (
@@ -17,10 +18,12 @@ var (
 
 func Must(
 	librarySvc library.Services,
+	libraryRepo library.Repository,
 ) library.Handlers {
 	once.Do(func() {
 		h = &handler{
-			librarySvc: librarySvc,
+			librarySvc:  librarySvc,
+			libraryRepo: libraryRepo,
 		}
 	})
 
