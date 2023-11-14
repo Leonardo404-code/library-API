@@ -1,6 +1,9 @@
 version: '3'
 
 tasks:
+  start:
+    cmds:
+      - 'go run ./cmd/server/main.go'
   lint:
     cmds:
       - 'gofmt -s -w .'
