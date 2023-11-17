@@ -2,12 +2,13 @@ package service
 
 import (
 	"fmt"
+	"mime/multipart"
 	"time"
 
 	"library-api/pkg/library"
 )
 
-func (s *service) SendBook(book *library.Book) (*library.Book, error) {
+func (s *service) CreateBook(book *library.Book, bookFile multipart.File) (*library.Book, error) {
 	if len(book.Title) < 3 || len(book.Title) > 80 {
 		return nil, fmt.Errorf(
 			"%w: the field 'name' must be between 3 and 80 characters long",
@@ -32,8 +33,13 @@ func (s *service) SendBook(book *library.Book) (*library.Book, error) {
 		Writer:      book.Writer,
 		Gender:      book.Gender,
 		ReleaseDate: book.ReleaseDate,
+		BookURL:     "",
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
+	}
+
+	if err := s.UploadBook(bookFile); err != nil {
+		return nil, err
 	}
 
 	if err := s.libraryRepo.CreateBook(bookModel); err != nil {

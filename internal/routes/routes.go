@@ -1,9 +1,9 @@
 package routes
 
 import (
-	handlers "library-api/pkg/library/handler"
-
 	"github.com/go-chi/chi/v5"
+
+	handlers "library-api/pkg/library/handler"
 )
 
 func SetupRoutes() *chi.Mux {
@@ -11,7 +11,7 @@ func SetupRoutes() *chi.Mux {
 	library := handlers.Build()
 
 	r.Get("/books", library.GetBooks)
-	r.Post("/books", library.SendBook)
+	r.Post("/books", library.CreateBook)
 	r.Post("/books/download", library.GetBooks)
 
 	return r
