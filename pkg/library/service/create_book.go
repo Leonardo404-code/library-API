@@ -11,14 +11,14 @@ import (
 func (s *service) CreateBook(book *library.Book, bookFile multipart.File) (*library.Book, error) {
 	if len(book.Title) < 3 || len(book.Title) > 80 {
 		return nil, fmt.Errorf(
-			"%w: the field 'name' must be between 3 and 80 characters long",
+			`%w: the field "name" must be between 3 and 80 characters long`,
 			ErrInvalidName,
 		)
 	}
 
 	if len(book.Description) < 8 {
 		return nil, fmt.Errorf(
-			"%w: field 'description' must be longer than 8 characters",
+			`%w: field "description" must be longer than 8 characters`,
 			ErrInvalidDescription,
 		)
 	}
@@ -38,13 +38,15 @@ func (s *service) CreateBook(book *library.Book, bookFile multipart.File) (*libr
 		UpdatedAt:   time.Now(),
 	}
 
-	if err := s.UploadBook(bookFile); err != nil {
-		return nil, err
-	}
-
-	if err := s.libraryRepo.CreateBook(bookModel); err != nil {
+	if err := s.libraryRepo.CreateBook(bookModel, bookFile, s.uploadToBucket(bookModel, bookFile)); err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrCreateBook, err)
 	}
 
 	return bookModel, nil
+}
+
+func (s *service) uploadToBucket(bookInfo *library.Book, bookFile multipart.File) func() error {
+	return func() error {
+		return s.storage.Upload(bookInfo, bookFile)
+	}
 }

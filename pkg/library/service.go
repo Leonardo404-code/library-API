@@ -6,5 +6,4 @@ import (
 
 type Services interface {
 	CreateBook(*Book, multipart.File) (*Book, error)
-	UploadBook(multipart.File) error
 }

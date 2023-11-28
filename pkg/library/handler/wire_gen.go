@@ -8,6 +8,7 @@ package handler
 
 import (
 	"library-api/internal/database"
+	"library-api/pkg/google"
 	"library-api/pkg/library"
 	"library-api/pkg/library/repository"
 	"library-api/pkg/library/service"
@@ -18,7 +19,8 @@ import (
 func Build() library.Handlers {
 	collection := database.Connect()
 	libraryRepository := repository.Must(collection)
-	services := service.Must(libraryRepository)
+	googleGoogle := google.Must()
+	services := service.Must(libraryRepository, googleGoogle)
 	handlers := Must(services, libraryRepository)
 	return handlers
 }

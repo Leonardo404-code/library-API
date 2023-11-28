@@ -4,12 +4,13 @@
 package handler
 
 import (
+	"github.com/google/wire"
+
 	"library-api/internal/database"
+	storagePkg "library-api/pkg/google"
 	"library-api/pkg/library"
 	libRepo "library-api/pkg/library/repository"
 	libSvc "library-api/pkg/library/service"
-
-	"github.com/google/wire"
 )
 
 func Build() library.Handlers {
@@ -18,6 +19,7 @@ func Build() library.Handlers {
 		libSvc.Must,
 		libRepo.Must,
 		database.Connect,
+		storagePkg.Must,
 	)
 	return nil
 }

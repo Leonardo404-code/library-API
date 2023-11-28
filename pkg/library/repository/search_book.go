@@ -13,7 +13,9 @@ func (r *repository) Search(filter *library.Filter) (book []*library.Book, err e
 		return nil, err
 	}
 
-	result, err := r.conn.Find(context.Background(), query)
+	collection := r.conn.Database("library").Collection("books")
+
+	result, err := collection.Find(context.Background(), query)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrFindBook, err)
 	}
