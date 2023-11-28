@@ -9,4 +9,4 @@ tasks:
       - 'gofmt -s -w .'
   update_docs:
     cmds:
-      - 'swag init -g ./cmd/server/main.go'
+      - 'swag init -ot json -g ./cmd/server/main.go' 

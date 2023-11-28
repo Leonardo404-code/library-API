@@ -76,7 +76,7 @@
                 "tags": [
                     "Books"
                 ],
-                "summary": "Send Book",
+                "summary": "Create Book",
                 "parameters": [
                     {
                         "description": "Required book information",
