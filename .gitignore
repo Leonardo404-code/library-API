@@ -3,3 +3,6 @@
 .vscode
 
 vendor
+
+/config/credentials
+/config/env
