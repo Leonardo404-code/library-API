@@ -1,5 +1,9 @@
 package library
 
+import (
+	"mime/multipart"
+)
+
 type Services interface {
-	SendBook(*Book) (*Book, error)
+	CreateBook(*Book, multipart.File) (*Book, error)
 }

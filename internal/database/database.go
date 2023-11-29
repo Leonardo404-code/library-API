@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-func Connect() *mongo.Collection {
+func Connect() *mongo.Client {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
@@ -30,7 +30,5 @@ func Connect() *mongo.Collection {
 		panic(err)
 	}
 
-	collection := client.Database("library").Collection("books")
-
-	return collection
+	return client
 }

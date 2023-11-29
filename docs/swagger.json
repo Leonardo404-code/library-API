@@ -73,10 +73,16 @@
             },
             "post": {
                 "description": "Creates the book in database and uploads the file into bucket",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "tags": [
                     "Books"
                 ],
-                "summary": "Send Book",
+                "summary": "Create Book",
                 "parameters": [
                     {
                         "description": "Required book information",
@@ -97,7 +103,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/handler.BookResponseDoc"
+                        }
                     }
                 }
             }
@@ -107,25 +116,8 @@
         "handler.BookRequestDoc": {
             "type": "object",
             "properties": {
-                "description": {
-                    "type": "string",
-                    "example": "Some description here"
-                },
-                "genre": {
-                    "type": "string",
-                    "example": "notice"
-                },
-                "release_date": {
-                    "type": "string",
-                    "example": "2023"
-                },
-                "title": {
-                    "type": "string",
-                    "example": "Test title"
-                },
-                "write": {
-                    "type": "string",
-                    "example": "Jhonn Doe"
+                "bookInfo": {
+                    "$ref": "#/definitions/handler.bookInfo"
                 }
             }
         },
@@ -166,6 +158,31 @@
                     "type": "string",
                     "format": "date",
                     "example": "2006-01-02T15:04:05Z"
+                },
+                "write": {
+                    "type": "string",
+                    "example": "Jhonn Doe"
+                }
+            }
+        },
+        "handler.bookInfo": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "example": "Some description here"
+                },
+                "genre": {
+                    "type": "string",
+                    "example": "notice"
+                },
+                "release_date": {
+                    "type": "string",
+                    "example": "2023"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Test title"
                 },
                 "write": {
                     "type": "string",
