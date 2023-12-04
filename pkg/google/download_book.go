@@ -5,13 +5,21 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
 func (c *client) DownloadBook(ctx context.Context, bookTitle string) error {
 	filename := fmt.Sprintf("%s.pdf", bookTitle)
 
-	bookFile, err := os.Create(filename)
+	downloadDir, err := getDownloadsDir()
+	if err != nil {
+		return err
+	}
+
+	filePath := filepath.Join(downloadDir, filename)
+
+	bookFile, err := os.Create(filePath)
 	if err != nil {
 		return fmt.Errorf("error in create file: %v", err)
 	}
