@@ -3,6 +3,8 @@ package handler
 import (
 	"net/url"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"library-api/pkg/library"
 )
 
@@ -14,10 +16,17 @@ func parseQueryParams(requestQuery url.Values) *library.Filter {
 		case "book_name":
 			filter.BookName = value[0]
 		case "book_id":
-			filter.BookID = value[0]
+			objectID, err := primitive.ObjectIDFromHex(value[0])
+			if err != nil {
+				return &library.Filter{
+					BookID:   primitive.ObjectID{},
+					BookName: "",
+				}
+			}
+			filter.BookID = objectID
 		default:
 			return &library.Filter{
-				BookID:   "",
+				BookID:   primitive.ObjectID{},
 				BookName: "",
 			}
 		}

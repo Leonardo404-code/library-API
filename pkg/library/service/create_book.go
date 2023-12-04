@@ -1,6 +1,7 @@
 package service
 
 import (
+	"context"
 	"fmt"
 	"mime/multipart"
 	"time"
@@ -38,15 +39,22 @@ func (s *service) CreateBook(book *library.Book, bookFile multipart.File) (*libr
 		UpdatedAt:   time.Now(),
 	}
 
-	if err := s.libraryRepo.CreateBook(bookModel, bookFile, s.uploadToBucket(bookModel, bookFile)); err != nil {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*50)
+	defer cancel()
+
+	if err := s.libraryRepo.CreateBook(bookModel, bookFile, s.uploadToBucket(ctx, bookModel, bookFile)); err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrCreateBook, err)
 	}
 
 	return bookModel, nil
 }
 
-func (s *service) uploadToBucket(bookInfo *library.Book, bookFile multipart.File) func() error {
+func (s *service) uploadToBucket(
+	ctx context.Context,
+	bookInfo *library.Book,
+	bookFile multipart.File,
+) func() error {
 	return func() error {
-		return s.storage.Upload(bookInfo, bookFile)
+		return s.storage.Upload(ctx, bookInfo, bookFile)
 	}
 }

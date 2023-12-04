@@ -5,5 +5,6 @@ import (
 )
 
 type Services interface {
-	CreateBook(*Book, multipart.File) (*Book, error)
+	CreateBook(bookInfo *Book, bookFile multipart.File) (*Book, error)
+	DownloadBook(filter *Filter) error
 }
