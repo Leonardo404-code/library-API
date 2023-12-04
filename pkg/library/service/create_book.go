@@ -34,7 +34,6 @@ func (s *service) CreateBook(book *library.Book, bookFile multipart.File) (*libr
 		Writer:      book.Writer,
 		Gender:      book.Gender,
 		ReleaseDate: book.ReleaseDate,
-		BookURL:     "",
 		CreatedAt:   time.Now(),
 		UpdatedAt:   time.Now(),
 	}
