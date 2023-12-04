@@ -10,7 +10,7 @@ import (
 // @Description	Download your books by passing the necessary parameters
 // @Tags			Cloud
 // @Param			book_id	query	string	true	"ID of the book you want to download"
-// @Router			/book/download [post]
+// @Router			/books/download [post]
 // @Success		200
 func (h *handler) DownloadBook(w http.ResponseWriter, r *http.Request) {
 	requestParams := parseQueryParams(r.URL.Query())
