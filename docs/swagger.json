@@ -4,7 +4,8 @@
         "description": "API for storing and download PDFs into a Google Cloud Plattform bucket",
         "title": "Library API",
         "contact": {
-            "email": "leonardobispo1000@gmail.com"
+            "name": "Leonardo Bispo",
+            "email": "leonardobispo.dev@gmail.com"
         },
         "license": {
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
@@ -12,29 +13,6 @@
         "version": "1.0"
     },
     "paths": {
-        "/book/download": {
-            "post": {
-                "description": "Download your books by passing the necessary parameters",
-                "tags": [
-                    "Cloud"
-                ],
-                "summary": "Download Book",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "ID of the book you want to download",
-                        "name": "id",
-                        "in": "query",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK"
-                    }
-                }
-            }
-        },
         "/books": {
             "get": {
                 "description": "Get books matching passed filters",
@@ -110,6 +88,29 @@
                     }
                 }
             }
+        },
+        "/books/download": {
+            "post": {
+                "description": "Download your books by passing the necessary parameters",
+                "tags": [
+                    "Cloud"
+                ],
+                "summary": "Download Book",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the book you want to download",
+                        "name": "book_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -138,7 +139,7 @@
                     "type": "string",
                     "example": "Some description here"
                 },
-                "genre": {
+                "gender": {
                     "type": "string",
                     "example": "notice"
                 },
@@ -159,7 +160,7 @@
                     "format": "date",
                     "example": "2006-01-02T15:04:05Z"
                 },
-                "write": {
+                "writer": {
                     "type": "string",
                     "example": "Jhonn Doe"
                 }
@@ -172,7 +173,7 @@
                     "type": "string",
                     "example": "Some description here"
                 },
-                "genre": {
+                "gender": {
                     "type": "string",
                     "example": "notice"
                 },
@@ -184,7 +185,7 @@
                     "type": "string",
                     "example": "Test title"
                 },
-                "write": {
+                "writer": {
                     "type": "string",
                     "example": "Jhonn Doe"
                 }

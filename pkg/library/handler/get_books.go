@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"library-api/pkg/res"
@@ -17,11 +18,17 @@ import (
 func (h *handler) GetBooks(w http.ResponseWriter, r *http.Request) {
 	request := parseQueryParams(r.URL.Query())
 
-	book, err := h.libraryRepo.Search(request)
+	books, err := h.libraryRepo.Search(request)
 	if err != nil {
-		res.JSON(w, http.StatusInternalServerError, err)
+		res.JSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	res.JSON(w, http.StatusOK, book)
+	if len(books) < 1 {
+		err = fmt.Errorf("not found: book not found")
+		res.JSON(w, http.StatusNotFound, err.Error())
+		return
+	}
+
+	res.JSON(w, http.StatusOK, books)
 }

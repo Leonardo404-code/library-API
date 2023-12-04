@@ -15,8 +15,8 @@ func init() {
 //	@title			Library API
 //	@version		1.0
 //	@description	API for storing and download PDFs into a Google Cloud Plattform bucket
-//	@contect.name	Leonardo Bispo
-//	@contact.email	leonardobispo1000@gmail.com
+//	@contact.name	Leonardo Bispo
+//	@contact.email	leonardobispo.dev@gmail.com
 //
 // license.name Apache 2.0
 //
