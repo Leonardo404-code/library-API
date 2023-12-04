@@ -6,3 +6,4 @@ vendor
 
 /config/credentials
 /config/env
+.pdf

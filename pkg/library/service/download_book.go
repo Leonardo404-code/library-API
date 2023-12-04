@@ -3,7 +3,6 @@ package service
 import (
 	"context"
 	"fmt"
-	"strings"
 	"time"
 
 	"library-api/pkg/library"
@@ -15,14 +14,14 @@ func (s *service) DownloadBook(filter *library.Filter) error {
 		return fmt.Errorf("%w: %v", ErrGetBook, err)
 	}
 
-	if len(books) < 1 {
+	if len(books) == 0 {
 		return fmt.Errorf("%w: books not found", ErrNotFound)
 	}
 
 	var bookTitle string
 
 	for _, book := range books {
-		bookTitle = strings.ReplaceAll(book.Title, " ", "-")
+		bookTitle = book.Title
 	}
 
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*50)
