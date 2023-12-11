@@ -23,7 +23,7 @@ func (r *repository) CreateBook(
 	defer session.EndSession(context.TODO())
 
 	if err = session.StartTransaction(); err != nil {
-		return fmt.Errorf("%w: %v", ErrStartSession, err)
+		return fmt.Errorf("%w: %v", ErrStartTransaction, err)
 	}
 
 	collection := r.conn.Database(libraryDB).Collection(booksColl)

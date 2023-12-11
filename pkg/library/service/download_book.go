@@ -15,7 +15,7 @@ func (s *service) DownloadBook(filter *library.Filter) error {
 	}
 
 	if len(books) == 0 {
-		return fmt.Errorf("%w: books not found", ErrNotFound)
+		return ErrNotFound
 	}
 
 	var bookTitle string

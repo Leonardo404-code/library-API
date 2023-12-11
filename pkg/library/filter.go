@@ -1,8 +1,6 @@
 package library
 
 import (
-	"fmt"
-
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -34,7 +32,7 @@ func (f *Filter) GenerateQuery() bson.D {
 
 func (f *Filter) ValidateParams() error {
 	if _, err := primitive.ObjectIDFromHex(f.BookID.Hex()); err != nil {
-		return fmt.Errorf("invalid ID: %v", err)
+		return err
 	}
 
 	return nil
