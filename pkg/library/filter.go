@@ -1,6 +1,8 @@
 package library
 
 import (
+	"fmt"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -10,7 +12,7 @@ type Filter struct {
 	BookName string
 }
 
-func (f *Filter) GenerateQuery() (bson.D, error) {
+func (f *Filter) GenerateQuery() bson.D {
 	query := bson.D{}
 
 	if !f.BookID.IsZero() {
@@ -27,5 +29,13 @@ func (f *Filter) GenerateQuery() (bson.D, error) {
 		})
 	}
 
-	return query, nil
+	return query
+}
+
+func (f *Filter) ValidateParams() error {
+	if _, err := primitive.ObjectIDFromHex(f.BookID.Hex()); err != nil {
+		return fmt.Errorf("invalid ID: %v", err)
+	}
+
+	return nil
 }

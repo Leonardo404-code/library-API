@@ -5,6 +5,7 @@ import (
 )
 
 type Repository interface {
-	Search(*Filter) ([]*Book, error)
-	CreateBook(*Book, multipart.File, func() error) error
+	Search(filter *Filter) ([]*Book, error)
+	CreateBook(bookInfo *Book, bookFile multipart.File, uploadToBucket func() error) error
+	DeleteBook(filter *Filter) error
 }

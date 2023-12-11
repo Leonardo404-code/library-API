@@ -8,14 +8,14 @@ import (
 )
 
 func (r *repository) Search(filter *library.Filter) (book []*library.Book, err error) {
-	query, err := filter.GenerateQuery()
+	query := filter.GenerateQuery()
 	if err != nil {
 		return nil, err
 	}
 
-	collection := r.conn.Database("library").Collection("books")
+	collection := r.conn.Database(libraryDB).Collection(booksColl)
 
-	result, err := collection.Find(context.Background(), query)
+	result, err := collection.Find(context.TODO(), query)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrFindBook, err)
 	}

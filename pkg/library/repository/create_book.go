@@ -26,9 +26,9 @@ func (r *repository) CreateBook(
 		return fmt.Errorf("%w: %v", ErrStartSession, err)
 	}
 
-	collection := r.conn.Database("library").Collection("books")
+	collection := r.conn.Database(libraryDB).Collection(booksColl)
 
-	if _, err := collection.InsertOne(context.Background(), bson.D{
+	if _, err := collection.InsertOne(context.TODO(), bson.D{
 		{Key: "title", Value: book.Title},
 		{Key: "description", Value: book.Description},
 		{Key: "writer", Value: book.Writer},
