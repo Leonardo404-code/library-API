@@ -16,17 +16,23 @@ import (
 // @Produce		json
 // @Success		200	{array}	handler.BookResponseDoc
 func (h *handler) GetBooks(w http.ResponseWriter, r *http.Request) {
-	request := parseQueryParams(r.URL.Query())
+	requestParams := parseQueryParams(r.URL.Query())
 
-	books, err := h.libraryRepo.Search(request)
+	if requestParams.BookID != "" {
+		if err := requestParams.ValidateParams(); err != nil {
+			res.JSON(w, http.StatusBadRequest, err.Error())
+			return
+		}
+	}
+
+	books, err := h.libraryRepo.Search(requestParams)
 	if err != nil {
 		res.JSON(w, http.StatusInternalServerError, err.Error())
 		return
 	}
 
 	if len(books) < 1 {
-		err = fmt.Errorf("not found: book not found")
-		res.JSON(w, http.StatusNotFound, err.Error())
+		res.JSON(w, http.StatusNotFound, fmt.Errorf("book not found").Error())
 		return
 	}
 

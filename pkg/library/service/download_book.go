@@ -8,8 +8,12 @@ import (
 	"library-api/pkg/library"
 )
 
-func (s *service) DownloadBook(filter *library.Filter) error {
-	books, err := s.libraryRepo.Search(filter)
+func (s *service) DownloadBook(reqParams *library.Filter) error {
+	if err := reqParams.ValidateParams(); err != nil {
+		return err
+	}
+
+	books, err := s.libraryRepo.Search(reqParams)
 	if err != nil {
 		return fmt.Errorf("%w: %v", ErrGetBook, err)
 	}
