@@ -17,8 +17,8 @@ import (
 // Injectors from wire.go:
 
 func Build() library.Handlers {
-	collection := database.Connect()
-	libraryRepository := repository.Must(collection)
+	client := database.Connect()
+	libraryRepository := repository.Must(client)
 	googleGoogle := google.Must()
 	services := service.Must(libraryRepository, googleGoogle)
 	handlers := Must(services, libraryRepository)

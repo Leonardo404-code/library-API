@@ -8,7 +8,7 @@ import (
 	"library-api/pkg/library"
 )
 
-func (s *service) DownloadBook(reqParams *library.Filter) error {
+func (s *service) DeleteBook(reqParams *library.Filter) error {
 	if err := reqParams.ValidateParams(); err != nil {
 		return err
 	}
@@ -18,7 +18,7 @@ func (s *service) DownloadBook(reqParams *library.Filter) error {
 		return fmt.Errorf("%w: %v", ErrGetBook, err)
 	}
 
-	if len(books) == 0 {
+	if len(books) < 1 {
 		return ErrNotFound
 	}
 
@@ -31,9 +31,15 @@ func (s *service) DownloadBook(reqParams *library.Filter) error {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*50)
 	defer cancel()
 
-	if err = s.storage.DownloadBook(ctx, bookTitle); err != nil {
-		return err
+	if err := s.libraryRepo.DeleteBook(reqParams, s.deleteFromBucket(ctx, bookTitle)); err != nil {
+		return fmt.Errorf("%w: %v", ErrDeleteBook, err)
 	}
 
 	return nil
+}
+
+func (s *service) deleteFromBucket(ctx context.Context, bookTitle string) func() error {
+	return func() error {
+		return s.storage.DeleteFromBucket(ctx, bookTitle)
+	}
 }

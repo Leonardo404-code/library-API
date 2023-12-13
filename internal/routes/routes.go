@@ -13,6 +13,7 @@ func SetupRoutes() *chi.Mux {
 	r.Get("/books", library.GetBooks)
 	r.Post("/books", library.CreateBook)
 	r.Post("/books/download", library.DownloadBook)
+	r.Delete("/books", library.DeleteBook)
 
 	return r
 }
