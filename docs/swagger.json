@@ -87,6 +87,27 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "description": "Delete a book in database and delete a file from bucket",
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Delete Book",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "ID of the bucket you want to delete",
+                        "name": "book_id",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
             }
         },
         "/books/download": {

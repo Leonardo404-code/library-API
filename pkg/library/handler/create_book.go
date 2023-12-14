@@ -10,15 +10,15 @@ import (
 	"library-api/pkg/res"
 )
 
-//	@Summary		Create Book
-//	@Description	Creates the book in database and uploads the file into bucket
-//	@Tags			Books
-//	@Param			data	body		handler.BookRequestDoc	true	"Required book information"
-//	@Param			book	formData	file					true	"Book File"
-//	@Router			/books [post]
-//	@Accept			multipart/form-data
-//	@Produce		json
-//	@Success		200	{object}	handler.BookResponseDoc
+// @Summary		Create Book
+// @Description	Creates the book in database and uploads the file into bucket
+// @Tags			Books
+// @Param			data	body		handler.BookRequestDoc	true	"Required book information"
+// @Param			book	formData	file					true	"Book File"
+// @Router			/books [post]
+// @Accept			multipart/form-data
+// @Produce		json
+// @Success		200	{object}	handler.BookResponseDoc
 func (h *handler) CreateBook(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseMultipartForm(maxMemory); err != nil {
 		customErr.Error(

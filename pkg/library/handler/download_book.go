@@ -11,7 +11,7 @@ import (
 // @Tags			Cloud
 // @Param			book_id	query	string	true	"ID of the book you want to download"
 // @Router			/books/download [post]
-// @Success		200
+// @Success		200 "OK"
 func (h *handler) DownloadBook(w http.ResponseWriter, r *http.Request) {
 	requestParams := parseQueryParams(r.URL.Query())
 
