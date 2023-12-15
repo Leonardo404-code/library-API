@@ -10,5 +10,4 @@ type client struct {
 	storage    *storage.Client
 	logger     logger.Logger
 	bucketName string
-	bucketURL  string
 }
