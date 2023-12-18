@@ -18,7 +18,7 @@ See [swagger.json](/docs/swagger.json)
 - Create the bucket
 - Create a service account in the following directory:
 
-```go
+```bash
 /config/credentials
 ```
 
@@ -44,12 +44,27 @@ go mod vendor
 
 ### Configure the project
 
-1. Setup the environment variables listed below
+1. Setup the environment variables listed below in directory:
+
+```bash
+/config/env/envs.yaml
+```
+
 2. Inside lib-api directory, run:
 
 ```go
 go run cmd/server/main.go
 ```
+
+## Test
+1. Inside lib-api directory, run:
+```go
+go test ./... -v
+```
+
+You should see messages like:
+
+![test output](/docs/test-output.png)
 
 ## **Environment Variables**
 

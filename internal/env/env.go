@@ -120,5 +120,4 @@ func Load() {
 	}
 
 	viper.AutomaticEnv()
-	log.Default().Printf("Loaded config from %s", viper.ConfigFileUsed())
 }
