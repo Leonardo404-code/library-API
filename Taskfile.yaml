@@ -8,3 +8,8 @@ tasks:
     cmds:
       - 'swag fmt ./'
       - 'swag init -ot json -g ./cmd/server/main.go'  
+  update_mocks:
+    cmds:
+      - 'mockery --name Services --dir pkg/library --output pkg/library/service --outpkg service --structname Mock --filename mock.go'
+      - 'mockery --name Repository --dir pkg/library --output pkg/library/repository --outpkg repository --structname Mock --filename mock.go'      
+      - 'mockery --name Google --dir pkg/google --output pkg/google --outpkg google --structname Mock --filename mock.go'

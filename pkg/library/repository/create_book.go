@@ -37,7 +37,7 @@ func (r *repository) CreateBook(
 		{Key: "created_at", Value: book.CreatedAt},
 		{Key: "updated_at", Value: book.UpdatedAt},
 	}); err != nil {
-		return err
+		return fmt.Errorf("%w: %v", ErrCreateBook, err)
 	}
 
 	if err = upload(); err != nil {
