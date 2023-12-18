@@ -12,4 +12,5 @@ var (
 	ErrGetBook            = errors.New("error in get book")
 	ErrNotFound           = errors.New("error books not found")
 	ErrDeleteBook         = errors.New("error in delete book")
+	ErrDownloadBook       = errors.New("error in download book")
 )

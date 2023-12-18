@@ -32,7 +32,7 @@ func (s *service) DownloadBook(reqParams *library.Filter) error {
 	defer cancel()
 
 	if err = s.storage.DownloadBook(ctx, bookTitle); err != nil {
-		return err
+		return fmt.Errorf("%w: %v", ErrDownloadBook, err)
 	}
 
 	return nil

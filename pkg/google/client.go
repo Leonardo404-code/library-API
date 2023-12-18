@@ -11,22 +11,22 @@ import (
 )
 
 func New() (Google, error) {
+	credentialsPath := env.GetString(CREDENTIALSPATH)
+
 	storageClient, err := storage.NewClient(
 		context.Background(),
-		option.WithCredentialsFile(credentialPath),
+		option.WithCredentialsFile(credentialsPath),
 	)
 	if err != nil {
 		return nil, err
 	}
 
 	bucketName := env.GetString(BUCKETNAME)
-	bucketURL := env.GetString(BUCKETURL)
 	newColorful := logger.NewColorful(logger.White, logger.Yellow, logger.Red)
 
 	return &client{
 		storage:    storageClient,
 		bucketName: bucketName,
-		bucketURL:  bucketURL,
 		logger:     newColorful,
 	}, nil
 }

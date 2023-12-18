@@ -7,6 +7,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
+
+	"library-api/internal/env"
 )
 
 func Connect() *mongo.Client {
@@ -14,8 +16,8 @@ func Connect() *mongo.Client {
 	defer cancel()
 
 	credentials := options.Credential{
-		Username: "root",
-		Password: "12345678",
+		Username: env.GetOrDefault("DATABASE.USER", "root"),
+		Password: env.GetOrDefault("DATABASE.PASSWORD", "12345678"),
 	}
 
 	client, err := mongo.Connect(

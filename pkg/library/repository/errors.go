@@ -11,4 +11,5 @@ var (
 	ErrStartSession      = errors.New("error in start session")
 	ErrStartTransaction  = errors.New("error in start transaction")
 	ErrCommitTransaction = errors.New("error in commit transaction")
+	ErrCreateBook        = errors.New("error in create book")
 )
