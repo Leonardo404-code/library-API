@@ -13,14 +13,22 @@ func getDownloadsDir() (string, error) {
 		return "", fmt.Errorf("error in get user home path: %v", err)
 	}
 
-	switch os := runtime.GOOS; os {
-	case "darwin":
+	os := runtime.GOOS
+	osSupported := []string{"darwin", "linux", "windows"}
+
+	if isSupported(osSupported, os) {
 		return filepath.Join(home, "Downloads"), nil
-	case "linux":
-		return filepath.Join(home, "Downloads"), nil
-	case "windows":
-		return filepath.Join(home, "Downloads"), nil
-	default:
+	} else {
 		return "", fmt.Errorf("operatin system not supported: %v", err)
 	}
+}
+
+func isSupported(osSupported []string, currentOs string) bool {
+	for _, os := range osSupported {
+		if currentOs == os {
+			return true
+		}
+	}
+
+	return false
 }
